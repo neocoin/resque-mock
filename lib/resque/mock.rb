@@ -20,6 +20,11 @@ module Resque
       defer(klass, args)
     end
 
+    def enqueue_to(queue, klass, *args)
+      puts "Mock enqueue_to: async=#{!!@async}, stack_depth=#{caller.size}, #{klass}, #{args.inspect}" if ENV['VERBOSE']
+      defer(klass, args)
+    end
+
     def enqueue_in(delay, klass, *args)
       puts "Mock enqueue in #{delay}: async=#{!!@async}, stack_depth=#{caller.size}, #{klass}, #{args.inspect}" if ENV['VERBOSE']
       defer(klass, args, delay)
